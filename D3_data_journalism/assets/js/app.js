@@ -44,7 +44,7 @@ var height = svgHeight - margin.top - margin.bottom;
     data.poverty =+data.poverty;
     data.healthcare = + data.healthcare;
     //console.log(data.poverty);
-    console.log(data.healthcare);
+    //console.log(data.healthcare);
   });
   // creating scale functions
   var xScalepoverty = d3.scaleLinear()
@@ -84,26 +84,26 @@ var height = svgHeight - margin.top - margin.bottom;
 
     // Step 6: Initialize tool tip
     // ==============================
-    var toolTip = d3.tip()
-      .attr("class", "tooltip")
-      .offset([80, -60])
-      .html(function(d) {
-        return (`${d.abbr}`);
-      });
+    // var toolTip = d3.tip()
+    //   .attr("class", "tooltip")
+    //   .offset([80, -60])
+    //   .html(function(d) {
+    //     return (`${d.abbr}`);
+    //   });
 
-    // Step 7: Create tooltip in the chart
-    // ==============================
-    chartGroup.call(toolTip);
+    // // Step 7: Create tooltip in the chart
+    // // ==============================
+    // chartGroup.call(toolTip);
 
-    // Step 8: Create event listeners to display and hide the tooltip
-    // ==============================
-    circlesGroup.on("click", function(data) {
-      toolTip.show(data, this);
-    })
-      // onmouseout event
-      .on("mouseout", function(data, index) {
-        toolTip.hide(data);
-      });
+    // // Step 8: Create event listeners to display and hide the tooltip
+    // // ==============================
+    // circlesGroup.on("click", function(data) {
+    //   toolTip.show(data, this);
+    // })
+    //   // onmouseout event
+    //   .on("mouseout", function(data, index) {
+    //     toolTip.hide(data);
+    //   });
 
     // Create axes labels
     chartGroup.append("text")
