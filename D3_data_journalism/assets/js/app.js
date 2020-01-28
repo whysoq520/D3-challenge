@@ -95,7 +95,7 @@ var height = svgHeight - margin.top - margin.bottom;
                     .attr("font-family", "sans-serif")
                     .attr("text-anchor", "middle")
                     .attr("font-size", "15px")
-                    .attr("fill", "red");
+                    .attr("fill", "black");
 
     // Step 6: Initialize tool tip
     // ==============================
