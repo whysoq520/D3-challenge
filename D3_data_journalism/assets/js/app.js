@@ -78,9 +78,24 @@ var height = svgHeight - margin.top - margin.bottom;
     .append("circle")
     .attr("cx", d => xScalepoverty(d.poverty))
     .attr("cy", d => yScalehealthcare(d.healthcare))
-    .attr("r", "15")
-    .attr("fill", "pink")
+    .attr("r", "18")
+    .attr("fill", "green")
     .attr("opacity", ".5");
+
+    //adding text element
+    var text = chartGroup.selectAll("text")
+                  .data(data)
+                  .enter()
+                  .append("text");
+    // adding the text attributes
+    var textLabels = text
+                    .attr("x", d => xScalepoverty(d.poverty))
+                    .attr("y", d => yScalehealthcare(d.healthcare))
+                    .text(d => d.abbr)
+                    .attr("font-family", "sans-serif")
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "15px")
+                    .attr("fill", "red");
 
     // Step 6: Initialize tool tip
     // ==============================
