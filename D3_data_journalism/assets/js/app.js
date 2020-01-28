@@ -50,36 +50,49 @@ var height = svgHeight - margin.top - margin.bottom;
   var xScalepoverty = d3.scaleLinear()
                         .domain(d3.extent(data, d=> d.poverty))
                         .range([0, width]);
+  var xScaleAge = d3.scaleLinear()
+                        .domain(d3.extent(data, d=> d.age))
+                        .range([0, width]);                      
 
   var yScalehealthcare = d3.scaleLinear()
                            .domain(d3.extent(data, d=> d.healthcare))
                            .range([height, 0]);
+  var yScaleSmoke = d3.scaleLinear()
+                      .domain(d3.extent(data, d=> d.smoke))
+                      .range([height, 0]);                         
 
   // creating axis functions 
   var bottomAxispoverty = d3.axisBottom(xScalepoverty);
-    //.tickFormat(d3.timeFormat("%d-%b-%Y"));
-    
+  var bottomAxisAge = d3.axisBottom(xScaleAge);
   var leftAxishealthcare = d3.axisLeft(yScalehealthcare);
+  var leftAxisSmoke = d3.axisLeft(yScaleSmoke);
 
   // set xscale to the bottom of the chart
   chartGroup.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(bottomAxispoverty);
+            .attr("transform", `translate(0, ${height})`)
+            .call(bottomAxispoverty);
+  chartGroup.append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(bottomAxisAge);
 
  // set yscale to the left of the chart
   chartGroup.append("g")
     // Define the color of the axis text
-    .classed("blue", true)
-    .call(leftAxishealthcare);
+            .classed("blue", true)
+            .call(leftAxishealthcare);
 
-    var circlesGroup = chartGroup.selectAll("circle")
+  chartGroup.append("g")
+            .classed("blue", true)
+            .call(leftAxisSmoke);          
+
+ var circlesGroup = chartGroup.selectAll("circle")
     .data(data)
     .enter()
     .append("circle")
     .attr("cx", d => xScalepoverty(d.poverty))
     .attr("cy", d => yScalehealthcare(d.healthcare))
     .attr("r", "18")
-    .attr("fill", "green")
+    .attr("fill", "blue")
     .attr("opacity", ".5");
 
     //adding text element
@@ -95,7 +108,7 @@ var height = svgHeight - margin.top - margin.bottom;
                     .attr("font-family", "sans-serif")
                     .attr("text-anchor", "middle")
                     .attr("font-size", "15px")
-                    .attr("fill", "black");
+                    .attr("fill", "blue");
 
     // Step 6: Initialize tool tip
     // ==============================
