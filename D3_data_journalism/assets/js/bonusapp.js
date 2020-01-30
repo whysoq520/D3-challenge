@@ -147,10 +147,10 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
     data.abbr = +data.abbr;
     data.age = + data.age;
     data.smokes = + data.smokes;
-    console.log(data.abbr);
+    //console.log(data.abbr);
     //console.log(data.poverty);
     //console.log(data.smokes)
-    console.log(data.age)
+    //console.log(data.age)
   });
 
   // xLinearScale function above csv import
@@ -176,7 +176,7 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
     .call(bottomAxis);
 
   // append y axis
-  chartGroup.append("g")
+  var yAxis = chartGroup.append("g")
     .call(leftAxis);
 
   // append initial circles
@@ -212,16 +212,18 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
   var ylabelsGroup = chartGroup.append("g")
     .attr("transform", "rotate(-90)");
 
-  var healthcareLable =ylabelsGroup.append("text")
+  var healthcareLabel =ylabelsGroup.append("text")
     .attr("y", 0 - margin.left+20)
     .attr("x", 0 - (height / 2))
+    .attr("value", "healthcare") // value to grab for event listener
     .attr("dy", "1em")
     .classed("axis-text", true)
     .text("Healthcare");
 
-  var smokesLable = ylabelsGroup.append("text")
+  var smokesLabel = ylabelsGroup.append("text")
    .attr("y", 0 - margin.left)
    .attr("x", 0 - (height / 2))
+   .attr("value", "smokes") // value to grab for event listener
    .attr("dy", "1em")
    .classed("axis-text", true)
    .text("Smoke");
@@ -230,6 +232,7 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
 
   // updateToolTip function above csv import
   var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+  //var circlesGroupY = updateToolTip(chosenYAxis, circlesGroupY);
 
   // x axis labels event listener
   xlabelsGroup.selectAll("text")
@@ -275,6 +278,58 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
         }
       }
     });
+
+    // y axis labels event listener
+    ylabelsGroup.selectAll("text")
+    .on("click", function() {
+      // get value of selection
+      var value = d3.select(this).attr("value");
+      if (value !== chosenYAxis) {
+
+        // replaces chosenXAxis with value
+        chosenYAxis = value;
+
+         console.log(chosenYAxis)
+
+        // functions here found above csv import
+        // updates x scale for new data
+        yLinearScale = yScale(censusData, chosenYAxis);
+
+        // updates x axis with transition
+        yAxis = renderYAxes(yLinearScale, yAxis);
+
+        // updates circles with new x values
+        circlesGroupY = renderCircles(circlesGroup, yLinearScale, chosenYAxis);
+
+        // updates tooltips with new info
+        //circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+
+        // changes classes to change bold text
+        if (chosenYAxis === "smokes") {
+          smokesLabel
+            .classed("active", true)
+            .classed("inactive", false);
+          healthcareLabel
+            .classed("active", false)
+            .classed("inactive", true);
+        }
+        else {
+          smokesLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          healthcareLabel
+            .classed("active", true)
+            .classed("inactive", false);
+        }
+      }
+    
+    });
+
 }).catch(function(error) {
   console.log(error);
 });
+
+
+
+
+

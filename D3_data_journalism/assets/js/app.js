@@ -39,9 +39,9 @@ var height = svgHeight - margin.top - margin.bottom;
     d.poverty =+d.poverty;
     d.healthcare = + d.healthcare;
     d.abbr = + d.abbr;
-    console.log(d.poverty);
+    //console.log(d.poverty);
     //console.log(data.healthcare);
-    console.log(d.abbr);
+    //console.log(d.abbr);
   });
   // creating scale functions
   var xScalepoverty = d3.scaleLinear()
