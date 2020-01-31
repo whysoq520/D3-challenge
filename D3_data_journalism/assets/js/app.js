@@ -38,7 +38,7 @@ var height = svgHeight - margin.top - margin.bottom;
   data.forEach(function (d) {
     d.poverty =+d.poverty;
     d.healthcare = + d.healthcare;
-    d.abbr = + d.abbr;
+    d.abbr =  d.abbr;
     //console.log(d.poverty);
     //console.log(data.healthcare);
     //console.log(d.abbr);
@@ -105,7 +105,7 @@ var height = svgHeight - margin.top - margin.bottom;
                     .attr("font-family", "sans-serif")
                     .attr("text-anchor", "middle")
                     .attr("font-size", "15px")
-                    .attr("fill", "blue");
+                    .attr("fill", "white");
 
     //Initialize tool tip
    // ==============================
@@ -139,7 +139,7 @@ circlesGroup.on("mouseover", function(d) {
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("<strong> Poverty (%)</strong>");
+      .text("<strong> + Poverty (%) + </strong>");
   }).catch(function(error) {
     console.log(error);
   }); 

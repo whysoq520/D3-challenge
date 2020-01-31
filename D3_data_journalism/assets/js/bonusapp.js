@@ -31,8 +31,8 @@ var chosenXAxis = "poverty";
 function xScale(censusData, chosenXAxis) {
   // create scales
   var xLinearScale = d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8,
-      d3.max(censusData, d => d[chosenXAxis]) * 1.2
+    .domain([d3.min(censusData, d => d[chosenXAxis]-2) ,
+      d3.max(censusData, d => d[chosenXAxis])
     ])
     .range([0, width]);
 
@@ -52,8 +52,7 @@ function renderAxes(newXScale, xAxis) {
   return xAxis;
 }
 
-// function used for updating circles group with a transition to
-// new circles
+// function used for updating circles group with a transition to new circles
 function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 
   circlesGroup.transition()
@@ -70,10 +69,10 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 var chosenYAxis = "healthcare";
 
 // function used for updating Y-scale var upon click on axis label
-function yScale(censusData, chosenyAxis) {
+function yScale(censusData, chosenYAxis) {
   // create scales
   var yLinearScale = d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenYAxis]) ,
+    .domain([d3.min(censusData, d => d[chosenYAxis]-2) ,
       d3.max(censusData, d => d[chosenYAxis])
     ])
     .range([height, 0]);
@@ -94,13 +93,13 @@ function renderYAxes(newYScale, yAxis) {
 
 
 // function used for updating circles group with a transition to new circles by xAxis
-function renderCirclesY(circlesGroup, newYScale, chosenYAxis) {
+function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
 
   circlesGroup.transition()
     .duration(1000)
     .attr("cy", d => newYScale(d[chosenYAxis]));
 
-  return circlesGroupY;
+  return circlesGroup;
 };
 
 
@@ -144,7 +143,7 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
   censusData.forEach(function(data) {
     data.poverty = +data.poverty;
     data.healthcare = +data.healthcare;
-    data.abbr = +data.abbr;
+    data.abbr = data.abbr;
     data.age = + data.age;
     data.smokes = + data.smokes;
     //console.log(data.abbr);
@@ -218,7 +217,7 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
     .attr("value", "healthcare") // value to grab for event listener
     .attr("dy", "1em")
     .classed("axis-text", true)
-    .text("Healthcare");
+    .text("Risk of Healthcare (%)");
 
   var smokesLabel = ylabelsGroup.append("text")
    .attr("y", 0 - margin.left)
@@ -299,7 +298,7 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
         yAxis = renderYAxes(yLinearScale, yAxis);
 
         // updates circles with new x values
-        circlesGroupY = renderCircles(circlesGroup, yLinearScale, chosenYAxis);
+        circlesGroup = renderYCircles(circlesGroup, yLinearScale, chosenYAxis);
 
         // updates tooltips with new info
         //circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
