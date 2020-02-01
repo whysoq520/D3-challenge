@@ -44,90 +44,66 @@ var height = svgHeight - margin.top - margin.bottom;
     //console.log(d.abbr);
   });
   // creating scale functions
-  var xScalepoverty = d3.scaleLinear()
-                        .domain(d3.extent(data, d=> d.poverty))
-                        .range([0, width]);
-  // var xScaleAge = d3.scaleLinear()
-  //                       .domain(d3.extent(data, d=> d.age))
-  //                       .range([0, width]);                      
+  var xScale = d3.scaleLinear()
+                 .domain([d3.min(data, d => d.poverty-1) ,
+                          d3.max(data, d => d.poverty) ])               
+                 .range([0, width]);
+                   
 
-  var yScalehealthcare = d3.scaleLinear()
-                           .domain(d3.extent(data, d=> d.healthcare))
-                           .range([height, 0]);
-  // var yScaleSmoke = d3.scaleLinear()
-  //                     .domain(d3.extent(data, d=> d.smoke))
-  //                     .range([height, 0]);                         
+  var yScale = d3.scaleLinear()
+                 .domain(d3.extent(data, d=> d.healthcare-2))
+                 .range([height, 0]);
+                          
+                 
 
   // creating axis functions 
-  var bottomAxispoverty = d3.axisBottom(xScalepoverty);
-  //var bottomAxisAge = d3.axisBottom(xScaleAge);
-  var leftAxishealthcare = d3.axisLeft(yScalehealthcare);
-  //var leftAxisSmoke = d3.axisLeft(yScaleSmoke);
+  var bottomAxis= d3.axisBottom(xScale);
+  var leftAxis = d3.axisLeft(yScale);
+  
 
   // set xscale to the bottom of the chart
   chartGroup.append("g")
             .attr("transform", `translate(0, ${height})`)
-            .call(bottomAxispoverty);
-  // chartGroup.append("g")
-  //           .attr("transform", `translate(0, ${height})`)
-  //           .call(bottomAxisAge);
-
+            .call(bottomAxis);
+ 
  // set yscale to the left of the chart
   chartGroup.append("g")
     // Define the color of the axis text
             .classed("blue", true)
-            .call(leftAxishealthcare);
+            .call(leftAxis);
 
-  // chartGroup.append("g")
-  //           .classed("blue", true)
-  //           .call(leftAxisSmoke);          
+       
 
  var circlesGroup = chartGroup.selectAll("circle")
     .data(data)
     .enter()
     .append("circle")
-    .attr("cx", d => xScalepoverty(d.poverty))
-    .attr("cy", d => yScalehealthcare(d.healthcare))
+    .attr("cx", d => xScale(d.poverty))
+    .attr("cy", d => yScale(d.healthcare))
     .attr("r", "18")
     .attr("fill", "blue")
     .attr("opacity", ".5");
 
-    //adding text element
-    var text = chartGroup.selectAll("text")
+
+
+
+
+
+//adding text element
+var text = chartGroup.selectAll(".stateText")
                   .data(data)
                   .enter()
-                  .append("text");
-    // adding the text attributes
-    var textLabels = text
-                    .attr("x", d => xScalepoverty(d.poverty))
-                    .attr("y", d => yScalehealthcare(d.healthcare))
-                    .text(d => d.abbr)
-                    .attr("font-family", "sans-serif")
-                    .attr("text-anchor", "middle")
-                    .attr("font-size", "15px")
-                    .attr("fill", "white");
+                  .append("text")
+                  .classed ("stateText", true)
+                  .attr("x", d => xScale(d.poverty))
+                  .attr("y", d => yScale(d.healthcare))
+                  .attr("font-size", "15px")
+                  .text(d => d.abbr)
+                  .attr("text-anchor", "middle")
+                  .attr("fill", "white");
 
-    //Initialize tool tip
-   // ==============================
-   // Step 1: Append a div to the body to create tooltips, assign it a class
-  // =======================================================
-  var toolTip = d3.select("body").append("div")
-  .attr("class", "tooltip");
-
-// Step 2: Add an onmouseover event to display a tooltip
-// ========================================================
-circlesGroup.on("mouseover", function(d) {
-  toolTip.style("display", "block");
-  toolTip.html("hi")
-    .style("left", d3.event.pageX + "px")
-    .style("top", d3.event.pageY + "px");
-})
-  // Step 3: Add an onmouseout event to make the tooltip invisible
-  .on("mouseout", function() {
-    toolTip.style("display", "none");
-  });
     
-    // Create axes labels
+// Create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left + 40)
@@ -139,10 +115,11 @@ circlesGroup.on("mouseover", function(d) {
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("<strong> + Poverty (%) + </strong>");
+      .text("Poverty (%)");
   }).catch(function(error) {
     console.log(error);
   }); 
+
 };
 
 makeResponsive();
