@@ -120,6 +120,7 @@ var text = chartGroup.selectAll(".stateText")
     console.log(error);
   }); 
 
+
 };
 
 makeResponsive();

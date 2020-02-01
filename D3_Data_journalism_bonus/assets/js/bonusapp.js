@@ -1,4 +1,4 @@
-// // @TODO: YOUR CODE HERE!
+// @TODO: YOUR CODE HERE!
 var svgWidth = 960;
 var svgHeight = 500;
 
@@ -115,25 +115,24 @@ function updateToolTip(chosenXAxis, circlesGroup) {
     var label = "age";
   }
 
-  var toolTip = d3.tip()
-    .attr("class", "tooltip")
-    .offset([80, -60])
-    .html(function(d) {
-      return (`${d.abbr}<br>${label} ${d[chosenXAxis]}`);
-    });
+  var toolTip = d3.select("body").append("div")
+    .attr("class", "tooltip");
 
-  circlesGroup.call(toolTip);
-
+  // Step 2: Add an onmouseover event to display a tooltip
+  // ========================================================
   circlesGroup.on("mouseover", function(data) {
-    toolTip.show(data);
+    toolTip.style("display", "block");
+    toolTip.html(` <strong>${data.abbr}</strong>`)
+      .style("left", d3.event.pageX + "px")
+      .style("top", d3.event.pageY + "px");
   })
-    // onmouseout event
-    .on("mouseout", function(data, index) {
-      toolTip.hide(data);
+    // Step 3: Add an onmouseout event to make the tooltip invisible
+       
+   .on("mouseout", function() {
+      toolTip.style("display", "none");
     });
 
   return circlesGroup;
-
 };  
 
 // Retrieve data from the CSV file and execute everything below
@@ -190,6 +189,20 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
     .attr("fill", "orange")
     .attr("opacity", ".5");
 
+//adding text element
+// var text = chartGroup.selectAll(".stateText")
+//                   .data(data)
+//                   .enter()
+//                   .append("text")
+//                   .classed ("stateText", true)
+//                   .attr("x", d => xScale(d.poverty))
+//                   .attr("y", d => yScale(d.healthcare))
+//                   .attr("font-size", "15px")
+//                   .text(d => d.abbr)
+//                   .attr("text-anchor", "middle")
+//                   .attr("fill", "white");
+
+                  
   // Create group for  2 x- axis labels
   var xlabelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
@@ -328,8 +341,3 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
 }).catch(function(error) {
   console.log(error);
 });
-
-
-
-
-
