@@ -105,7 +105,7 @@ function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
 
 
 
-// function used for updating circles group with new tooltip
+// // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, circlesGroup) {
 
   if (chosenXAxis === "poverty") {
@@ -186,7 +186,7 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
     .append("circle")
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
-    .attr("r", 20)
+    .attr("r", 10)
     .attr("fill", "orange")
     .attr("opacity", ".5");
 

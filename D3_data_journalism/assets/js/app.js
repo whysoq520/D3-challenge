@@ -45,13 +45,14 @@ var height = svgHeight - margin.top - margin.bottom;
   });
   // creating scale functions
   var xScale = d3.scaleLinear()
-                 .domain([d3.min(data, d => d.poverty-1) ,
+                 .domain([d3.min(data, d => (d.poverty-4.7)*2) ,
+
                           d3.max(data, d => d.poverty) ])               
                  .range([0, width]);
                    
-
   var yScale = d3.scaleLinear()
-                 .domain(d3.extent(data, d=> d.healthcare-2))
+                 .domain([d3.min(data, d=> (d.healthcare-2.5)*2),
+                          d3.max(data, d => d.healthcare) ])
                  .range([height, 0]);
                           
                  
@@ -80,8 +81,8 @@ var height = svgHeight - margin.top - margin.bottom;
     .append("circle")
     .attr("cx", d => xScale(d.poverty))
     .attr("cy", d => yScale(d.healthcare))
-    .attr("r", "18")
-    .attr("fill", "blue")
+    .attr("r", "10")
+    .attr("fill", "purple")
     .attr("opacity", ".5");
 
 
@@ -97,7 +98,7 @@ var text = chartGroup.selectAll(".stateText")
                   .classed ("stateText", true)
                   .attr("x", d => xScale(d.poverty))
                   .attr("y", d => yScale(d.healthcare))
-                  .attr("font-size", "15px")
+                  .attr("font-size", "8px")
                   .text(d => d.abbr)
                   .attr("text-anchor", "middle")
                   .attr("fill", "white");
@@ -116,6 +117,30 @@ var text = chartGroup.selectAll(".stateText")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("Poverty (%)");
+
+  //ToolTip (initialize tooltip)  
+    var toolTip = d3.tip()
+      .attr("class", "tooltip")
+      .offset([80, -60])
+      .html(function(d) {
+        console.log(d.state)
+        console.log(d.poverty)
+
+        return (`<strong>${d.state}<strong><br>Poverty :${d.poverty}<br> Risk of Healthcare :${d.healthcare}`);
+      });
+
+    // Step 2: Create the tooltip in chartGroup.
+    chartGroup.call(toolTip);
+
+    // Step 3: Create "mouseover" event listener to display tooltip
+    circlesGroup.on("mouseover", function(d) {
+      toolTip.show(d, this);
+    })
+    // Step 4: Create "mouseout" event listener to hide tooltip
+      .on("mouseout", function(d) {
+        toolTip.hide(d);
+      });
+
   }).catch(function(error) {
     console.log(error);
   }); 
