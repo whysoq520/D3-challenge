@@ -31,7 +31,7 @@ var chosenXAxis = "poverty";
 function xScale(censusData, chosenXAxis) {
   // create scales
   var xLinearScale = d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenXAxis]-2) ,
+    .domain([d3.min(censusData, d => d[chosenXAxis]-0.2) ,
       d3.max(censusData, d => d[chosenXAxis])
     ])
     .range([0, width]);
@@ -72,7 +72,7 @@ var chosenYAxis = "healthcare";
 function yScale(censusData, chosenYAxis) {
   // create scales
   var yLinearScale = d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenYAxis]-2) ,
+    .domain([d3.min(censusData, d => d[chosenYAxis]-0.7) ,
       d3.max(censusData, d => d[chosenYAxis])
     ])
     .range([height, 0]);
@@ -227,19 +227,19 @@ d3.csv("assets/data/data.csv").then(function(censusData, err) {
     .attr("fill", "orange")
     .attr("opacity", ".5");
 
-//adding text element
-// var text = chartGroup.selectAll(".stateText")
-//                   .data(data)
-//                   .enter()
-//                   .append("text")
-//                   .classed ("stateText", true)
-//                   .attr("x", d => xScale(d.poverty))
-//                   .attr("y", d => yScale(d.healthcare))
-//                   .attr("font-size", "15px")
-//                   .text(d => d.abbr)
-//                   .attr("text-anchor", "middle")
-//                   .attr("fill", "white");
 
+//adding text element
+var text = chartGroup.selectAll(".stateText")
+                  .data(censusData)
+                  .enter()
+                  .append("text")
+                  .classed ("stateText", true)
+                  .attr("x", d => xScale(d.poverty))
+                  .attr("y", d => yScale(d.healthcare))
+                  .attr("font-size", "8px")
+                  .text(d => d.abbr)
+                  .attr("text-anchor", "middle")
+                  .attr("fill", "white");
                   
   // Create group for  2 x- axis labels
   var xlabelsGroup = chartGroup.append("g")

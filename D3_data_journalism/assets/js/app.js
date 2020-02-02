@@ -45,21 +45,21 @@ var height = svgHeight - margin.top - margin.bottom;
   });
   // creating scale functions
   var xScale = d3.scaleLinear()
-                 .domain([d3.min(data, d => (d.poverty-4.7)*2) ,
+                 .domain([d3.min(data, d => (d.poverty-0.2)) ,
 
                           d3.max(data, d => d.poverty) ])               
                  .range([0, width]);
                    
   var yScale = d3.scaleLinear()
-                 .domain([d3.min(data, d=> (d.healthcare-2.5)*2),
+                 .domain([d3.min(data, d=> (d.healthcare-1)),
                           d3.max(data, d => d.healthcare) ])
                  .range([height, 0]);
                           
                  
 
   // creating axis functions 
-  var bottomAxis= d3.axisBottom(xScale);
-  var leftAxis = d3.axisLeft(yScale);
+  var bottomAxis= d3.axisBottom(xScale).ticks(20);
+  var leftAxis = d3.axisLeft(yScale).ticks(20);
   
 
   // set xscale to the bottom of the chart
