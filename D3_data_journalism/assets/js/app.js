@@ -81,7 +81,7 @@ var height = svgHeight - margin.top - margin.bottom;
     .append("circle")
     .attr("cx", d => xScale(d.poverty))
     .attr("cy", d => yScale(d.healthcare))
-    .attr("r", "10")
+    .attr("r", "12")
     .attr("fill", "purple")
     .attr("opacity", ".5");
 
@@ -123,10 +123,9 @@ var text = chartGroup.selectAll(".stateText")
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        console.log(d.state)
-        console.log(d.poverty)
-
-        return (`<strong>${d.state}<strong><br>Poverty :${d.poverty}<br> Risk of Healthcare :${d.healthcare}`);
+        //console.log(d.state)
+        //console.log(d.poverty)
+      return (`<strong>${d.state}<strong><br>Poverty :${d.poverty}%<br> Risk of Healthcare :${d.healthcare}%`);
       });
 
     // Step 2: Create the tooltip in chartGroup.
