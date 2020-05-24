@@ -1,53 +1,41 @@
-# Welcome to my D3-Dabbler-Challenge 
+**D3-Dabbler-Challenge **
+
+In this project, I create two scatter plots utilizing Javascript and D3 skills plus html : A simple plot of Risk of Healthcare VS Poverty including state abbreviations in the circles; An animated scatter plots of Risk of Healthcare/Smoke VS Poverty/Age including state abbreviations in the circles. 
+
+**Installation**
+The code was developed using the Visual Studio Code, versions 1.45.1. 
+Please go to https://code.visualstudio.com/ download latest version
 
 
-1.to create a scatter plot between two of the data variables, including state abbreviations in the circles.
+**Deployment**
+1.You'll need to use python -m http.server to run the visualization. This will host the page at localhost:8000 in your web browser.
+2. Or via Visual Studio Code Go Live to run the app.js in your web browser. Please note to open folder to active Go Live function. 
+![golive.jpg](Images/golive.jpg)
 
-
-
-Welcome to the Natural Language Processing in Python Tutorial!
-We will be going through several Jupyter Notebooks during the tutorial and use a number of data science libraries along the way. The easiest way to get started is to download Anaconda, which is free and open source. When you download this, it comes with the Jupyter Notebook IDE and many popular data science libraries, so you don’t have to install them one by one.
-
-Here are the steps you’ll need to take before the start of the tutorial:
-
-1. Download Anaconda
-I highly recommend that you download the Python 3.7 version.
-
-2. Download the Jupyter Notebooks
-Clone or download this Github repository, so you have access to all the Jupyter Notebooks (.ipynb extension) in the tutorial. Note the green button on the right side of the screen that says Clone or download. If you know how to use Github, go ahead and clone the repo. If you don't know how to use Github, you can also just download the zip file and unzip it on your laptop.
-
-3. Launch Anaconda and Open a Jupyter Notebook
-Windows: Open the Anaconda Navigator program. You should see the Jupyter Notebook logo. Below the logo, click Launch. A browser window should open up. In the browser window, navigate to the location of the saved Jupyter Notebook files and open 0-Hello-World.ipynb. Follow the instructions in the notebook.
-
-Mac/Linux: Open a terminal. Type jupyter notebook. A browser should open up. In the browser window, navigate to the location of the saved Jupyter Notebook files and open 0-Hello-World.ipynb. Follow the instructions in the notebook.
-
-4. Install a Few Additional Packages
-There are a few additional packages we'll be using during the tutorial that are not included when you download Anaconda - wordcloud, textblob and gensim.
-
-Windows: Open the Anaconda Prompt program. You should see a black window pop up. Type conda install -c conda-forge wordcloud to download wordcloud. You will be asked whether you want to proceed or not. Type y for yes. Once that is done, type conda install -c conda-forge textblob to download textblob and y to proceed, and type conda install -c conda-forge gensim to download gensim and y to proceed.
-
-Mac/Linux: Your terminal should already be open. Type command-t to open a new tab. Type conda install -c conda-forge wordcloud to download wordcloud. You will be asked whether you want to proceed or not. Type y for yes. Once that is done, type conda install -c conda-forge textblob to download textblob and y to proceed, and type conda install -c conda-forge gensim to download gensim and y to proceed.
-
-If you have any issues, please email me at adashofdata@gmail.com or come talk to me before the start of the tutorial.
-Deployment
-VBA live to view online or use python -m http.server to run the visualization. This will host the page at localhost:8000 in the web browser.
-
-
-Built With
+**Built With**
 .HTML
 .CSS
 .d3
 
-Authors: Shaohua Liu
+**Data Sources**
+The data set is based on 2014 ACS 1-year estimates: https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml
 
-License
+**Results**
+![map.jpg](Images/map.jpg)
+![map.jpg](Images/map.jpg)
+![map.jpg](Images/map.jpg)
 
-Acknowledgments: instructor:Piro D. 
-TAs:Darel R. 
+**License**
+This project is licensed under Self Pracetice code of javascript, D3 
 
 
 
-Good luck!
+**Authors**
+Shaohua Liu
 
-Copyright
-Trilogy Education Services © 2019. All Rights Reserved.
+
+
+**Acknowledgments**
+instructor:Ahmad G.
+TAs:Sara H and Sneid 
+
