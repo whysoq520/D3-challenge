@@ -1,4 +1,4 @@
-**#D3-Dabbler-Challenge#**
+#**D3-Dabbler-Challenge**#
 
 In this project, I create two scatter plots utilizing Javascript and D3 skills plus html : A simple plot of Risk of Healthcare VS Poverty including state abbreviations in the circles; An animated scatter plots of Risk of Healthcare/Smoke VS Poverty/Age including state abbreviations in the circles. 
 
