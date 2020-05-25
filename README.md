@@ -12,7 +12,7 @@ Please go to https://code.visualstudio.com/ download latest version
 
 1.You'll need to use python -m http.server to run the visualization. This will host the page at localhost:8000 in your web browser.
 2. Or via Visual Studio Code Go Live to run the app.js in your web browser. Please note to open folder to active Go Live function. 
-![golive.jpg](Images/golive.jpg)
+![golive.jpg](https://github.com/whysoq520/D3-challenge/blob/master/Images/golive.png)
 
 **Built With**
 
