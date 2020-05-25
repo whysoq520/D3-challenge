@@ -31,9 +31,9 @@ The data set is based on 2014 ACS 1-year estimates: https://factfinder.census.go
 ![riskofhealthcarevspoverty.png](https://github.com/whysoq520/D3-challenge/blob/master/Images/riskofhealthcarevspoverty.png))
 
 2. Interactive plot 
-![riskofhealthcarevspoverty.jpg](https://github.com/whysoq520/D3-challenge/blob/master/Images/riskofhealthcarevspoverty.png)
+![smokevspoverty.png](https://github.com/whysoq520/D3-challenge/blob/master/Images/smokevspoverty.png)
 
-![smokevsage.jpg](https://github.com/whysoq520/D3-challenge/blob/master/Images/smokevsage.png)
+![smokevsage.png](https://github.com/whysoq520/D3-challenge/blob/master/Images/smokevsage.png)
 
 **License**
 
