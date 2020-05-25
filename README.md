@@ -28,7 +28,7 @@ The data set is based on 2014 ACS 1-year estimates: https://factfinder.census.go
 
 1. Simple  plot of Risk of Healthcare VS Poverty including state abbreviations in the circles
 
-![map.jpg](Images/map.jpg)
+![riskofhealthcarevspoverty.png](https://github.com/whysoq520/D3-challenge/blob/master/Images/riskofhealthcarevspoverty.png))
 
 2. Interactive plot 
 ![riskofhealthcarevspoverty.jpg](https://github.com/whysoq520/D3-challenge/blob/master/Images/riskofhealthcarevspoverty.png)
